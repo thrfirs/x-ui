@@ -32,8 +32,11 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.18
+      - name: Set tag env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: build linux amd64 version
         run: |
+          echo $RELEASE_VERSION > config/version
           CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o xui-release -v main.go
           mkdir x-ui
           cp xui-release x-ui/xui-release
@@ -75,10 +78,13 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.18
+      - name: Set tag env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: build linux arm64 version
         run: |
-          sudo apt-get update
-          sudo apt install gcc-aarch64-linux-gnu
+          apt-get update  # is already root in container
+          apt install gcc-aarch64-linux-gnu
+          echo $RELEASE_VERSION > config/version
           CGO_ENABLED=1 GOOS=linux GOARCH=arm64 CC=aarch64-linux-gnu-gcc go build -o xui-release -v main.go
           mkdir x-ui
           cp xui-release x-ui/xui-release
