@@ -19,7 +19,7 @@ Modified based on [vaxilu/x-ui](https://github.com/vaxilu/x-ui)
 # 安装&升级
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/thrfirs/x-ui/master/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/thrfirs/x-ui/main/install.sh)
 ```
 
 ## 手动安装&升级
