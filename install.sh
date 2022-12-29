@@ -148,6 +148,7 @@ install_x-ui() {
     #echo -e ""
     #echo -e "如果是更新面板，则按你之前的方式访问面板"
     #echo -e ""
+    mkdir -p /var/log/v2ray  # for v2ray/xray logs
     systemctl daemon-reload
     systemctl enable x-ui
     systemctl start x-ui
